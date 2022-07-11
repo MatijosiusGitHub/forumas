@@ -17,6 +17,15 @@
       "email": "bgates@microsoft.com",
       "password": "billgates",
       "id": 2
+    },
+    {
+      "name": "Arnorld",
+      "surname": "Szwarzneggerr",
+      "username": "terminator",
+      "age": "65",
+      "email": "a.sz@mail.com",
+      "password": "terminator",
+      "id": 3
     }
   ],
   "questions": [
