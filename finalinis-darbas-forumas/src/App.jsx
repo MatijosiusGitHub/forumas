@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
         <Route
           path="/"
