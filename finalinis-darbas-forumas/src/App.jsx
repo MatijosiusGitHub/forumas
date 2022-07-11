@@ -9,9 +9,18 @@ import Navbar from "./components/Nav/Navbar";
 import HomePage from "./components/Home/Homepage";
 
 function App() {
-  // connection to backend to get users
-  const [user, setUser] = useState({});
+  // jungiasi i backa gayti questions ir answers
+  const [questions, setQuestions] = useState([]);
+  useEffect(() => {
+    fetch(`/questions`)
+      .then((res) => res.json())
+      .then((data) => {
+        setQuestions(data);
+      });
+  }, []);
 
+  const [user, setUser] = useState({});
+  // patikrina ar legalus
   const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -24,7 +33,13 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<HomePage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />}
+          element={
+            <HomePage
+              data={questions}
+              setLoggedIn={setLoggedIn}
+              loggedIn={loggedIn}
+            />
+          }
         />
         <Route path="/register" element={<Register />} />
         <Route

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 
-const HomePage = ({ setLoggedIn, loggedIn }) => {
+const HomePage = ({ setLoggedIn, loggedIn, data }) => {
   // const navigate = useNavigate();
   useEffect(() => {
     fetch("/verifyToken", {
@@ -19,13 +19,14 @@ const HomePage = ({ setLoggedIn, loggedIn }) => {
         }
       });
   }, []);
-
   return (
     <>
       {loggedIn ? (
-        <div>
-          <h1>pasijunges</h1>
-        </div>
+        data.map((question, id) => (
+          <div key={id}>
+            <h1>{question.question}</h1>
+          </div>
+        ))
       ) : (
         <div>
           <h1>atsijunges</h1>

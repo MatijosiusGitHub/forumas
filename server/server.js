@@ -45,6 +45,12 @@ app.get('/verifyToken', async (req, res) => {
     res.json({ verify: verify })
 })
 
+// questions 
+app.get('/questions', async (req, res) => {
+    const data = await fetch(`http://localhost:8080/questions`)
+        .then(data => data.json())
+    res.json(data);
+});
 
 
 app.listen(process.env.PORT || 5051, () => console.log(`serveris vaziuoja ant ${PORT} porto`))
