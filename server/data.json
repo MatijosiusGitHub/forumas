@@ -1,0 +1,25 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Tomas",
+            "surname":"Dudovicius",
+            "age": 32,
+            "email": "tomas@mail.com",
+            "password": "allGood"
+        }
+    ],
+    "questions": [
+        {
+            "id": 1,
+            "question": "What's was the easiest to learn in TS group?"
+        }
+    ],
+    "answers": [
+        {
+            "id": 1,
+            "question_id": 1,
+            "answer": "To me it was HTML and CSS.. I'd like to learn more JS..."
+        }
+    ]
+}
