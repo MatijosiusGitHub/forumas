@@ -1,7 +1,8 @@
 import { useEffect } from "react";
+import "./Home.css";
 // import { useNavigate } from "react-router-dom";
 
-const HomePage = ({ setLoggedIn, loggedIn, data }) => {
+const HomePage = ({ setLoggedIn, loggedIn, dataQuestion, dataAnswers }) => {
   // const navigate = useNavigate();
   useEffect(() => {
     fetch("/verifyToken", {
@@ -19,14 +20,27 @@ const HomePage = ({ setLoggedIn, loggedIn, data }) => {
         }
       });
   }, []);
+
   return (
     <>
       {loggedIn ? (
-        data.map((question, id) => (
-          <div key={id}>
-            <h1>{question.question}</h1>
-          </div>
-        ))
+        <div className="mainHomeDiv">
+          <h1>Frequently asked questions</h1>
+          {dataQuestion.map((question, id) => (
+            <div className="questionDiv" key={id}>
+              <h1>{question.question}</h1>
+              <div>
+                {dataAnswers
+                  .filter((a) => {
+                    return a.question_id === question.id;
+                  })
+                  .map((answer, i) => {
+                    return <p key={i}>{answer.answer}</p>;
+                  })}
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
         <div>
           <h1>atsijunges</h1>

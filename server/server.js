@@ -46,8 +46,15 @@ app.get('/verifyToken', async (req, res) => {
 })
 
 // questions 
-app.get('/questions', async (req, res) => {
-    const data = await fetch(`http://localhost:8080/questions`)
+app.get('/questions/:id?', async (req, res) => {
+    const data = await fetch(`http://localhost:8080/questions/${req.params.id ? req.params.id : ''}`)
+        .then(data => data.json())
+    res.json(data);
+});
+
+// questions 
+app.get('/answers/:id?', async (req, res) => {
+    const data = await fetch(`http://localhost:8080/answers/${req.params.id ? req.params.id : ''}`)
         .then(data => data.json())
     res.json(data);
 });

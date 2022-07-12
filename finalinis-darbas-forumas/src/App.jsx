@@ -11,22 +11,23 @@ import HomePage from "./components/Home/Homepage";
 function App() {
   // jungiasi i backa gayti questions ir answers
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
   useEffect(() => {
     fetch(`/questions`)
       .then((res) => res.json())
       .then((data) => {
         setQuestions(data);
       });
-  }, []);
-
-  const [user, setUser] = useState({});
-  // patikrina ar legalus
-  const [loggedIn, setLoggedIn] = useState(false);
-  useEffect(() => {
+    fetch("/answers")
+      .then((res) => res.json())
+      .then((answers) => {
+        setAnswers(answers);
+      });
     const token = localStorage.getItem("token");
     if (token) setLoggedIn(true);
   }, []);
-
   return (
     <>
       <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
@@ -35,7 +36,8 @@ function App() {
           path="/"
           element={
             <HomePage
-              data={questions}
+              dataQuestion={questions}
+              dataAnswers={answers}
               setLoggedIn={setLoggedIn}
               loggedIn={loggedIn}
             />
