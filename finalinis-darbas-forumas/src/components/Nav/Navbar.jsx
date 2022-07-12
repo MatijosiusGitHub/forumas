@@ -18,6 +18,7 @@ const Nav = ({ loggedIn, setLoggedIn }) => {
             <Logo />
           </Link>
           <div>
+            <button></button>
             <button onClick={logout}>Logout</button>
           </div>
         </nav>

@@ -62,6 +62,14 @@ app.get('/answers/:id?', async (req, res) => {
         .then(data => data.json())
     res.json(data);
 });
+// users 
+app.get('/users', async (req, res) => {
+    const data = await fetch(`http://localhost:8080/users/`)
+        .then(data => data.json())
+    res.json(data);
+});
+
+
 
 
 app.listen(process.env.PORT || 5051, () => console.log(`serveris vaziuoja ant ${PORT} porto`))

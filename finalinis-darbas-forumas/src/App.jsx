@@ -13,7 +13,8 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({}); // login ir register user
+  const [users, setUsers] = useState({}); // users i ekrana
   useEffect(() => {
     fetch(`/questions`)
       .then((res) => res.json())
@@ -24,6 +25,11 @@ function App() {
       .then((res) => res.json())
       .then((answers) => {
         setAnswers(answers);
+      });
+    fetch("/users")
+      .then((res) => res.json())
+      .then((users) => {
+        setUsers(users);
       });
 
     const token = localStorage.getItem("token");
@@ -37,7 +43,8 @@ function App() {
           path="/"
           element={
             <HomePage
-              user={user}
+              dataUsers={users} // username ir id kurie persiduos prie atsakymu
+              user={user} // prisijungusio userio username
               setUser={setUser}
               dataQuestion={questions}
               dataAnswers={answers}

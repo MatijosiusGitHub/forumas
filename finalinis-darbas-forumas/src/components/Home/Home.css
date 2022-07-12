@@ -5,3 +5,13 @@
 .questionDiv{
     background-color: aliceblue;
 }
+.welcomeDiv{
+    display: flex;
+    justify-content: space-between;
+}
+.welcomeDiv button{
+    cursor: pointer;
+    border: none;
+    background-color: aliceblue;
+    width: 10rem;
+}
