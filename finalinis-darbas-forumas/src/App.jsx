@@ -25,17 +25,20 @@ function App() {
       .then((answers) => {
         setAnswers(answers);
       });
+
     const token = localStorage.getItem("token");
     if (token) setLoggedIn(true);
   }, []);
   return (
     <>
-      <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+      <Navbar user={user} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
         <Route
           path="/"
           element={
             <HomePage
+              user={user}
+              setUser={setUser}
               dataQuestion={questions}
               dataAnswers={answers}
               setLoggedIn={setLoggedIn}

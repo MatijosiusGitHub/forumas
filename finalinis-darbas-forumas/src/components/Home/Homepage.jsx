@@ -2,7 +2,14 @@ import { useEffect } from "react";
 import "./Home.css";
 // import { useNavigate } from "react-router-dom";
 
-const HomePage = ({ setLoggedIn, loggedIn, dataQuestion, dataAnswers }) => {
+const HomePage = ({
+  setLoggedIn,
+  loggedIn,
+  dataQuestion,
+  dataAnswers,
+  setUser,
+  user,
+}) => {
   // const navigate = useNavigate();
   useEffect(() => {
     fetch("/verifyToken", {
@@ -17,15 +24,15 @@ const HomePage = ({ setLoggedIn, loggedIn, dataQuestion, dataAnswers }) => {
           setLoggedIn(false);
         } else {
           setLoggedIn(true);
+          setUser({ username: data.username, id: data.id });
         }
       });
   }, []);
-
   return (
     <>
       {loggedIn ? (
         <div className="mainHomeDiv">
-          <h1>Frequently asked questions</h1>
+          <h1>Welcome back, {user.username}</h1>
           {dataQuestion.map((question, id) => (
             <div className="questionDiv" key={id}>
               <h1>{question.question}</h1>
@@ -35,7 +42,11 @@ const HomePage = ({ setLoggedIn, loggedIn, dataQuestion, dataAnswers }) => {
                     return a.question_id === question.id;
                   })
                   .map((answer, i) => {
-                    return <p key={i}>{answer.answer}</p>;
+                    return (
+                      <div key={i}>
+                        <p>{answer.answer}</p>
+                      </div>
+                    );
                   })}
               </div>
             </div>

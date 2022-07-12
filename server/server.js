@@ -42,7 +42,11 @@ app.post('/register', async (req, res) => {
 // verify token
 app.get('/verifyToken', async (req, res) => {
     const verify = await isLoggedIn(req)
-    res.json({ verify: verify })
+    res.json({
+        verify: verify,
+        username: req.token.username,
+        id: req.token.id
+    })
 })
 
 // questions 
@@ -52,7 +56,7 @@ app.get('/questions/:id?', async (req, res) => {
     res.json(data);
 });
 
-// questions 
+// answers 
 app.get('/answers/:id?', async (req, res) => {
     const data = await fetch(`http://localhost:8080/answers/${req.params.id ? req.params.id : ''}`)
         .then(data => data.json())
