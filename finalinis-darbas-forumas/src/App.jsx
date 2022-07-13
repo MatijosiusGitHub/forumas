@@ -7,6 +7,8 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import Navbar from "./components/Nav/Navbar";
 import HomePage from "./components/Home/Homepage";
+import QuestionByID from "./components/QuestionsById/QuestionsById";
+import AddQuestion from "./components/AddQuestion/AddQuestion";
 
 function App() {
   // jungiasi i backa gayti questions ir answers
@@ -39,6 +41,8 @@ function App() {
     <>
       <Navbar user={user} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
+        <Route path="/question" element={<QuestionByID />} />
+        <Route path="/ask" element={<AddQuestion />} />
         <Route
           path="/"
           element={

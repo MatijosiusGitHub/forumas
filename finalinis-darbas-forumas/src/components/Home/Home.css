@@ -8,10 +8,12 @@
 .welcomeDiv{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .welcomeDiv button{
     cursor: pointer;
     border: none;
     background-color: aliceblue;
     width: 10rem;
+    height: 4rem;
 }

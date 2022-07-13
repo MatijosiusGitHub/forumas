@@ -36,7 +36,9 @@ const HomePage = ({
         <div className="mainHomeDiv">
           <div className="welcomeDiv">
             <h1>Welcome back, {user.username}</h1>
-            <button>Ask question</button>
+            <Link to={"/ask"}>
+              <button>Ask question</button>
+            </Link>
           </div>
           {dataQuestion.map((question, id) => (
             <div className="questionDiv" key={id}>

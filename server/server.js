@@ -66,7 +66,10 @@ app.get('/answers/:id?', async (req, res) => {
 app.get('/users', async (req, res) => {
     const data = await fetch(`http://localhost:8080/users/`)
         .then(data => data.json())
-    res.json(data);
+    const usernames = data.map((username) => {
+        return ({ username: username.username, id: username.id })
+    })
+    res.json(usernames);
 });
 
 
