@@ -1,9 +1,7 @@
 import "./reg.css";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [data, setData] = useState([]);
   const navigate = useNavigate();
 
   const addUser = async (e) => {

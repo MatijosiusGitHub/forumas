@@ -63,13 +63,25 @@ app.get('/answers/:id?', async (req, res) => {
     res.json(data);
 });
 // users 
-app.get('/users', async (req, res) => {
+app.get('/users/', async (req, res) => {
     const data = await fetch(`http://localhost:8080/users/`)
         .then(data => data.json())
     const usernames = data.map((username) => {
         return ({ username: username.username, id: username.id })
     })
     res.json(usernames);
+});
+// ask question
+app.post('/ask', async (req, res) => {
+    const { user_id, question } = req.body
+    await fetch('http://localhost:8080/questions', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id, question })
+    })
+    res.json()
 });
 
 

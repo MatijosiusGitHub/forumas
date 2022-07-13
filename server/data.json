@@ -31,16 +31,23 @@
   "questions": [
     {
       "id": 1,
-      "user_id":3,
+      "user_id": 3,
       "question": "What's was the easiest to learn in TS group?"
-    },{
-      "id":2 ,
-      "user_id":1,
+    },
+    {
+      "id": 2,
+      "user_id": 1,
       "question": "Why is so raining today? Why rain on festival?"
-    },{
-      "id":3 ,
-      "user_id":2,
+    },
+    {
+      "id": 3,
+      "user_id": 2,
       "question": "Any complains?"
+    },
+    {
+      "question": "Is ir friday?",
+      "user_id": 1,
+      "id": 4
     }
   ],
   "answers": [
@@ -49,29 +56,34 @@
       "user_id": 1,
       "question_id": 1,
       "answer": "To me it was HTML and CSS.. I'd like to learn more JS..."
-    },{
+    },
+    {
       "id": 2,
       "user_id": 2,
       "question_id": 1,
       "answer": "I'd say begining, HTML and CSS .. :D "
-    },{
+    },
+    {
       "id": 3,
       "user_id": 1,
       "question_id": 3,
       "answer": "I do! I love rain, but i have when it's raining on important days for me.. "
-    },{
+    },
+    {
       "id": 4,
-      "user_id":2,
+      "user_id": 2,
       "question_id": 3,
       "answer": "I agree with Parukom "
-    },{
+    },
+    {
       "id": 5,
-      "user_id":3,
+      "user_id": 3,
       "question_id": 3,
       "answer": "I agree with both of you "
-    },{
+    },
+    {
       "id": 6,
-      "user_id":3,
+      "user_id": 3,
       "question_id": 2,
       "answer": "Don't worry, Parukom, real for real ravers that's not an issue 😎"
     }

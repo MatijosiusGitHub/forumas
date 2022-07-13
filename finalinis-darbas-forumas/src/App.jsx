@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 
 // components
 import Register from "./components/Register/Register";
@@ -15,13 +15,14 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState({}); // login ir register user
-  const [users, setUsers] = useState({}); // users i ekrana
+  const [user, setUser] = useState({}); // login ir register user, welcome user
+  const [users, setUsers] = useState(); // users i ekrana
+
   useEffect(() => {
-    fetch(`/questions`)
+    fetch(`/questions/`)
       .then((res) => res.json())
-      .then((data) => {
-        setQuestions(data);
+      .then((questions) => {
+        setQuestions(questions);
       });
     fetch("/answers")
       .then((res) => res.json())
@@ -33,7 +34,21 @@ function App() {
       .then((users) => {
         setUsers(users);
       });
-
+    fetch("/verifyToken", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.verify === false) {
+          setLoggedIn(false);
+        } else {
+          setLoggedIn(true);
+          setUser({ username: data.username, id: data.id });
+        }
+      });
     const token = localStorage.getItem("token");
     if (token) setLoggedIn(true);
   }, []);
@@ -41,18 +56,24 @@ function App() {
     <>
       <Navbar user={user} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
-        <Route path="/question" element={<QuestionByID />} />
-        <Route path="/ask" element={<AddQuestion />} />
+        <Route
+          path="/questions/:id"
+          element={
+            <QuestionByID
+              dataUsers={users} // username ir id kurie persiduos prie atsakymu
+              dataAnswers={answers}
+            />
+          }
+        />
+        <Route path="/ask" element={<AddQuestion user={user} />} />
         <Route
           path="/"
           element={
             <HomePage
-              dataUsers={users} // username ir id kurie persiduos prie atsakymu
               user={user} // prisijungusio userio username
-              setUser={setUser}
+              dataUsers={users} // username ir id kurie persiduos prie atsakymu
               dataQuestion={questions}
               dataAnswers={answers}
-              setLoggedIn={setLoggedIn}
               loggedIn={loggedIn}
             />
           }
