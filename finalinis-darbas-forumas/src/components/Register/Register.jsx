@@ -56,6 +56,7 @@ const Register = () => {
           name="password"
           placeholder="RealyG00dPass"
           min="6"
+          required
         />{" "}
         <br />
         <button type="submit">Sign up</button>

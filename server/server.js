@@ -74,7 +74,7 @@ app.get('/answers/:id?', async (req, res) => {
     res.json(data);
 });
 // post answer
-app.post(`/question/answer`, async (req, res) => {
+app.post(`/question/answer/:id?`, async (req, res) => {
     const { user_id, question_id, answer } = req.body
     await fetch(`http://localhost:8080/answers/${req.params.id ? req.params.id : ''}`, {
         method: "POST",
@@ -83,15 +83,29 @@ app.post(`/question/answer`, async (req, res) => {
         },
         body: JSON.stringify({ user_id, question_id, answer })
     })
-    res.json()
+    res.json({ success: true })
 });
 // delete answer
-app.delete('/deleteAnswer/:id?', async (req, res) => {
-    await fetch(`http://localhost:8080/answers/${req.params.id ? req.params.id : ''}`, {
-        method: "delete",
+app.delete('/deleteAnswer/:id', async (req, res) => {
+    await fetch(`http://localhost:8080/answers/${req.params.id}`, {
+        method: "DELETE",
     })
     res.json()
 });
+// edit answer
+app.patch('/question/answer/:id', async (req, res) => {
+    console.log('asda')
+    await fetch(`http://localhost:8080/answers/${req.params.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ answer: req.body.answer })
+    })
+    res.json({ success: true })
+});
+
+
 // users 
 app.get('/users/', async (req, res) => {
     const data = await fetch(`http://localhost:8080/users/`)

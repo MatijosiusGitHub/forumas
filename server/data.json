@@ -55,7 +55,7 @@
       "id": 1,
       "user_id": 1,
       "question_id": 1,
-      "answer": "To me it was HTML and CSS.. I'd like to learn more JS..."
+      "answer": "asd"
     },
     {
       "id": 2,
@@ -110,6 +110,18 @@
       "question_id": 4,
       "answer": "yea man",
       "id": 12
+    },
+    {
+      "user_id": 1,
+      "question_id": 1,
+      "answer": "you old bastard, Bill...",
+      "id": 13
+    },
+    {
+      "user_id": 1,
+      "question_id": 4,
+      "answer": "you miscalculated, bot... 😁",
+      "id": 14
     }
   ]
 }

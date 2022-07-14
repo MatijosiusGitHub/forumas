@@ -18,6 +18,7 @@ function App() {
   const [user, setUser] = useState({}); // login ir register user, welcome user
   const [users, setUsers] = useState(); // users i ekrana
   const [answer, setAnswer] = useState([]); // get one answer
+  const [editData, setEditData] = useState({}); // edit answer data
 
   const getAllAnswers = () => {
     fetch("/answers")
@@ -38,15 +39,17 @@ function App() {
     const token = localStorage.getItem("token");
     if (token) setLoggedIn(true);
 
-    fetch("/question/answer")
+    // get answer by id
+    fetch(`/question/answer`)
       .then((res) => res.json())
       .then((answer) => {
         setAnswer(answer);
       });
+
     //get all questions
     getAllQuestions();
 
-    //get users
+    //get all answers
     getAllAnswers();
 
     fetch("/users")
@@ -79,10 +82,9 @@ function App() {
           path="/questions/:id"
           element={
             <QuestionByID
-              getAllQuestions={getAllQuestions}
               getAllAnswers={getAllAnswers}
               loggedIn={loggedIn}
-              user={user}
+              user={user} // useris su savo id
               dataUsers={users} // username ir id kurie persiduos prie atsakymu
               dataAnswers={answers} // visi atsakymai
               answer={answer} // vienas atsakymas

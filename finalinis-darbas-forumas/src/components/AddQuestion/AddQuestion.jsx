@@ -29,6 +29,7 @@ const AddQuestion = ({ user }) => {
           type="text"
           name="question"
           placeholder="Why sky is blue?"
+          required
         />{" "}
         <br />
         <button type="submit">Ask</button>
