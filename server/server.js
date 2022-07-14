@@ -44,8 +44,8 @@ app.get('/verifyToken', async (req, res) => {
     const verify = await isLoggedIn(req)
     res.json({
         verify: verify,
-        username: req.token.username,
-        id: req.token.id
+        username: req.token?.username,
+        id: req.token?.id
     })
 })
 
@@ -54,22 +54,6 @@ app.get('/questions/:id?', async (req, res) => {
     const data = await fetch(`http://localhost:8080/questions/${req.params.id ? req.params.id : ''}`)
         .then(data => data.json())
     res.json(data);
-});
-
-// answers 
-app.get('/answers/:id?', async (req, res) => {
-    const data = await fetch(`http://localhost:8080/answers/${req.params.id ? req.params.id : ''}`)
-        .then(data => data.json())
-    res.json(data);
-});
-// users 
-app.get('/users/', async (req, res) => {
-    const data = await fetch(`http://localhost:8080/users/`)
-        .then(data => data.json())
-    const usernames = data.map((username) => {
-        return ({ username: username.username, id: username.id })
-    })
-    res.json(usernames);
 });
 // ask question
 app.post('/ask', async (req, res) => {
@@ -82,6 +66,40 @@ app.post('/ask', async (req, res) => {
         body: JSON.stringify({ user_id, question })
     })
     res.json()
+});
+// answers 
+app.get('/answers/:id?', async (req, res) => {
+    const data = await fetch(`http://localhost:8080/answers/${req.params.id ? req.params.id : ''}`)
+        .then(data => data.json())
+    res.json(data);
+});
+// post answer
+app.post(`/question/answer`, async (req, res) => {
+    const { user_id, question_id, answer } = req.body
+    await fetch(`http://localhost:8080/answers/${req.params.id ? req.params.id : ''}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id, question_id, answer })
+    })
+    res.json()
+});
+// delete answer
+app.delete('/deleteAnswer/:id?', async (req, res) => {
+    await fetch(`http://localhost:8080/answers/${req.params.id ? req.params.id : ''}`, {
+        method: "delete",
+    })
+    res.json()
+});
+// users 
+app.get('/users/', async (req, res) => {
+    const data = await fetch(`http://localhost:8080/users/`)
+        .then(data => data.json())
+    const usernames = data.map((username) => {
+        return ({ username: username.username, id: username.id })
+    })
+    res.json(usernames);
 });
 
 

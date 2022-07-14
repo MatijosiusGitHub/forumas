@@ -49,8 +49,44 @@ const HomePage = ({ loggedIn, dataQuestion, dataAnswers, user, dataUsers }) => {
           ))}
         </div>
       ) : (
-        <div>
-          <h1>atsijunges</h1>
+        <div className="mainHomeDiv">
+          <div className="welcomeDiv">
+            <h1>Wello, stranger</h1>
+          </div>
+          {dataQuestion.map((question, id) => (
+            <div className="questionDiv" key={id}>
+              <Link to={`/questions/${question.id}`}>
+                <h1>{question.question}</h1>
+              </Link>
+              <div>
+                {dataAnswers
+                  .filter((answer) => {
+                    return answer.question_id === question.id;
+                  })
+                  .map((answer, i) => {
+                    return (
+                      <div key={i}>
+                        <p>
+                          <span style={{ fontWeight: "bold" }}>
+                            {typeof dataUsers !== "undefined" ? (
+                              dataUsers
+                                .filter((username) => {
+                                  return username.id === answer.user_id;
+                                })
+                                .map((username) => username.username)
+                            ) : (
+                              <span>Loading</span>
+                            )}
+                            :
+                          </span>{" "}
+                          {answer.answer}{" "}
+                        </p>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </>

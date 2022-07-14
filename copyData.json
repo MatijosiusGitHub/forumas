@@ -82,6 +82,12 @@
       "answer": "Don't worry, Parukom, real for real ravers that's not an issue 😎"
     },
     {
+      "user_id": 1,
+      "question_id": 2,
+      "answer": "indeed brother",
+      "id": 7
+    },
+    {
       "user_id": 3,
       "question_id": 4,
       "answer": "not yet my man ",
@@ -101,15 +107,9 @@
     },
     {
       "user_id": 1,
-      "question_id": 4,
-      "answer": "is it yet?",
+      "question_id": 3,
+      "answer": "as",
       "id": 11
-    },
-    {
-      "user_id": 3,
-      "question_id": 4,
-      "answer": "yea man",
-      "id": 12
     }
   ]
 }
