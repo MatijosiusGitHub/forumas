@@ -2,7 +2,22 @@ import "./Home.css";
 // import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const HomePage = ({ loggedIn, dataQuestion, dataAnswers, user, dataUsers }) => {
+const HomePage = ({
+  loggedIn,
+  dataQuestion,
+  dataAnswers,
+  user,
+  dataUsers,
+  getAllQuestions,
+}) => {
+  // delete question
+  const deleteQuestion = (questionID) => {
+    fetch(`/deleteQuestion/${questionID}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(getAllQuestions());
+  };
   return (
     <>
       {loggedIn ? (
@@ -18,6 +33,17 @@ const HomePage = ({ loggedIn, dataQuestion, dataAnswers, user, dataUsers }) => {
               <Link to={`/questions/${question.id}`}>
                 <h1>{question.question}</h1>
               </Link>
+              {question.user_id === user.id ? (
+                <button
+                  onClick={() =>
+                    deleteQuestion(
+                      user.id === question.user_id ? question.id : null
+                    )
+                  }
+                >
+                  delete
+                </button>
+              ) : null}
               <div>
                 {dataAnswers
                   .filter((answer) => {

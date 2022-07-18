@@ -1,6 +1,6 @@
 import "./questionsOnid.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const QuestionByID = ({
   dataUsers,
@@ -8,10 +8,11 @@ const QuestionByID = ({
   user,
   loggedIn,
   getAllAnswers,
+  getAllQuestions,
 }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState([]); // question by id data
-
   // get question data
   useEffect(() => {
     fetch(`/questions/${id}`)
@@ -20,6 +21,38 @@ const QuestionByID = ({
         setData(data);
       });
   }, [id]);
+  const getQuestionData = () => {
+    fetch(`/questions/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      });
+  };
+  // edit question
+  const [edit, setEdit] = useState("");
+  const editQuestionID = (e, editQuestion1) => {
+    e.preventDefault();
+    fetch(`/editQuestion/${editQuestion1}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        question: edit,
+      }),
+    })
+      .then(() => getQuestionData()) //// cia baigiau!
+      .catch((err) => console.log(err));
+  };
+  // delete question
+  const deleteQuestion = (questionID) => {
+    fetch(`/deleteQuestion/${questionID}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(navigate("/"));
+  };
 
   // delete answer
   const deleteAnswer = (answerID) => {
@@ -52,7 +85,7 @@ const QuestionByID = ({
       .catch((err) => console.log(err));
   };
 
-  // edit questions
+  // edit answer
   const [change, setChange] = useState("");
   const editAnswerID = (e, editAnswer1) => {
     e.preventDefault();
@@ -64,16 +97,77 @@ const QuestionByID = ({
       },
       body: JSON.stringify({
         answer: change,
+        edited: true,
       }),
     })
       .then(() => getAllAnswers())
       .catch((err) => console.log(err));
   };
 
+  // edit knopke question
+  const showHideQuestionEdit = () => {
+    document.querySelector(".textareaQuestion").classList.toggle("hidden");
+  };
+  // edit knopke answer
+  const showHideAnswerEdit = (id) => {
+    document.getElementById(`${id}`).classList.toggle("hidden");
+  };
   return (
     <div className="mainQuestionByIdDiv">
       <div className="mainQuestion">
-        <h1>{data.question}</h1>
+        <h1>
+          {data.question}{" "}
+          <span
+            style={{
+              fontSize: 7,
+            }}
+          >
+            {data.edited === true ? "edited" : null}
+          </span>
+          <button
+            onClick={deleteQuestion}
+            style={{
+              backgroundColor: "transparent",
+              color: "red",
+              border: "1px solid red",
+              borderRadius: "50px",
+              fontSize: 8,
+              float: "right",
+              cursor: "pointer",
+            }}
+          >
+            {" "}
+            delete
+          </button>
+          <button
+            onClick={showHideQuestionEdit}
+            style={{
+              fontSize: 10,
+              backgroundColor: "transparent",
+              border: "1px solid gray",
+              borderRadius: "50px",
+              cursor: "pointer",
+              float: "right",
+            }}
+          >
+            edit
+          </button>
+        </h1>
+        {/*  edit form  */}
+        <form
+          className="textareaQuestion hidden"
+          onSubmit={(e) => editQuestionID(e, data.id)}
+        >
+          <textarea
+            name="editQuestion"
+            cols="75"
+            rows="4"
+            required
+            value={edit}
+            onChange={(e) => setEdit(e.target.value)}
+          ></textarea>
+          <button type="submit">OK</button>
+        </form>
       </div>
       <div className="mainAnswers">
         {dataAnswers
@@ -97,17 +191,34 @@ const QuestionByID = ({
                     )}
                     :
                   </span>{" "}
-                  {answer.answer} {/*  delete button  */}
+                  {answer.answer}{" "}
+                  <span
+                    style={{
+                      fontSize: 7,
+                    }}
+                  >
+                    {answer.edited === true ? "edited" : null}
+                  </span>
+                  {/*  delete button  */}
                   <span>
                     {user.id === answer.user_id ? (
                       <button
+                        style={{
+                          backgroundColor: "transparent",
+                          color: "red",
+                          border: "1px solid red",
+                          borderRadius: "50px",
+                          fontSize: 8,
+                          float: "right",
+                          cursor: "pointer",
+                        }}
                         onClick={() =>
                           deleteAnswer(
                             user.id === answer.user_id ? answer.id : null
                           )
                         }
                       >
-                        🚮
+                        delete
                       </button>
                     ) : null}
                   </span>{" "}
@@ -115,23 +226,30 @@ const QuestionByID = ({
                   <span>
                     {user.id === answer.user_id ? (
                       <button
-                        onClick={() =>
-                          editAnswerID(
-                            user.id === answer.user_id ? answer.id : null
-                          )
-                        }
+                        style={{
+                          backgroundColor: "transparent",
+                          border: " 1px solid gray",
+                          fontSize: 8,
+                          borderRadius: "50px",
+                          float: "right",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => showHideAnswerEdit(answer.id)}
                       >
-                        ✍🏼
+                        edit
                       </button>
                     ) : null}
-                  </span>
+                  </span>{" "}
                 </div>
                 {user.id === answer.user_id ? (
                   <div>
                     {/*  edit form  */}
-                    <form onSubmit={(e) => editAnswerID(e, answer.id)}>
+                    <form
+                      id={answer.id}
+                      className="textareaAnswer hidden"
+                      onSubmit={(e) => editAnswerID(e, answer.id)}
+                    >
                       <textarea
-                        className="textarea"
                         name="editAnswer"
                         cols="75"
                         rows="4"

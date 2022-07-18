@@ -1,7 +1,7 @@
 import "./addQuestion.css";
 import { useNavigate } from "react-router-dom";
 
-const AddQuestion = ({ user }) => {
+const AddQuestion = ({ user, getAllQuestions }) => {
   const navigate = useNavigate();
   const askQuestion = async (e) => {
     e.preventDefault();
@@ -15,9 +15,11 @@ const AddQuestion = ({ user }) => {
       body: JSON.stringify({
         question: e.target.question.value,
         user_id: user.id,
+        time_created: new Date().toLocaleDateString("LT"),
       }),
     })
       .then(() => navigate("/", { replace: true }))
+      .then(getAllQuestions())
       .catch((err) => console.log(err));
   };
   return (

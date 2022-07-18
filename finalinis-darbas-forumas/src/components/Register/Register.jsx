@@ -55,7 +55,7 @@ const Register = () => {
           type="password"
           name="password"
           placeholder="RealyG00dPass"
-          min="6"
+          minLength="6"
           required
         />{" "}
         <br />

@@ -18,7 +18,6 @@ function App() {
   const [user, setUser] = useState({}); // login ir register user, welcome user
   const [users, setUsers] = useState(); // users i ekrana
   const [answer, setAnswer] = useState([]); // get one answer
-  const [editData, setEditData] = useState({}); // edit answer data
 
   const getAllAnswers = () => {
     fetch("/answers")
@@ -32,7 +31,7 @@ function App() {
       .then((res) => res.json())
       .then((questions) => {
         setQuestions(questions);
-      });
+      }, []);
   };
 
   useEffect(() => {
@@ -83,6 +82,7 @@ function App() {
           element={
             <QuestionByID
               getAllAnswers={getAllAnswers}
+              getAllQuestions={getAllQuestions}
               loggedIn={loggedIn}
               user={user} // useris su savo id
               dataUsers={users} // username ir id kurie persiduos prie atsakymu
@@ -91,11 +91,17 @@ function App() {
             />
           }
         />
-        <Route path="/ask" element={<AddQuestion user={user} />} />
+        <Route
+          path="/ask"
+          element={
+            <AddQuestion getAllQuestions={getAllQuestions} user={user} />
+          }
+        />
         <Route
           path="/"
           element={
             <HomePage
+              getAllQuestions={getAllQuestions}
               user={user} // prisijungusio userio username
               dataUsers={users} // username ir id kurie persiduos prie atsakymu
               dataQuestion={questions}
