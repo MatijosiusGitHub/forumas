@@ -107,7 +107,7 @@ app.post(`/question/answer/:id?`, async (req, res) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ user_id, question_id, answer, time_created: new Date().toLocaleDateString("LT") }),
+      body: JSON.stringify({ user_id, question_id, answer, time_created: new Date().toLocaleDateString("LT"), edited: false }),
     }
   );
   res.json({ success: true });
@@ -142,7 +142,52 @@ app.get("/users/", async (req, res) => {
   });
   res.json(usernames);
 });
+// get like
+app.get("/likes/:id", async (req, res) => {
+  const data = await fetch(
+    `http://localhost:8080/answers/${req.params.id ? req.params.id : ""}`
+  ).then((data) => data.json());
+  res.json(data);
+});
+// update likes
+app.patch("/likes/:id", async (req, res) => {
+  const auth = await isLoggedIn(req)
+  if (!auth) {
+    return res.json({ success: false })
+  }
+  await fetch(`http://localhost:8080/answers/${req.params.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ liked: req.body.liked }),
+  });
+  res.json({ success: true });
+});
 
+// get dislike
+app.get("/dislike/:id", async (req, res) => {
+  const data = await fetch(
+    `http://localhost:8080/answers/${req.params.id ? req.params.id : ""}`
+  ).then((data) => data.json());
+  res.json(data);
+});
+
+// update dislike
+app.patch("/dislike/:id", async (req, res) => {
+  const auth = await isLoggedIn(req)
+  if (!auth) {
+    return res.json({ success: false })
+  }
+  await fetch(`http://localhost:8080/answers/${req.params.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ dislike: req.body.dislike }),
+  });
+  res.json({ success: true });
+});
 app.listen(process.env.PORT || 5051, () =>
   console.log(`serveris vaziuoja ant ${PORT} porto`)
 );

@@ -80,3 +80,14 @@
     transition: 0.1s;
     transform: scale(1.4);
 }
+.likeDislikeDiv{
+    display: flex;
+    align-items: center;
+}
+.likeDislikeDiv p{
+    padding:0 10px;
+}
+.likeDislikeDiv button{
+    background-color: transparent;
+    border: none;
+}

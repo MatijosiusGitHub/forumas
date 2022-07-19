@@ -1,6 +1,9 @@
 import "./Home.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import Switch from "@mui/material/Switch";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const HomePage = ({
   loggedIn,
@@ -9,6 +12,7 @@ const HomePage = ({
   user,
   dataUsers,
   getAllQuestions,
+  setQuestions,
 }) => {
   // delete question
   const deleteQuestion = (questionID) => {
@@ -18,10 +22,34 @@ const HomePage = ({
       .then((response) => response.json())
       .then(getAllQuestions());
   };
-  function countAnswers() {
-    dataAnswers.filter((answers) => answers.question_id === dataQuestion.id);
-  }
+  // filter
+  useEffect(() => {
+    checked ? mostAnswers() : newest();
+  }, [dataQuestion.length]);
+  const [checked, setChecked] = useState(false);
+  const newest = () => {
+    setQuestions(
+      [...dataQuestion].sort(
+        (b, a) =>
+          new Date(a.time_created).getTime() -
+          new Date(b.time_created).getTime()
+      )
+    );
+  };
+  const mostAnswers = () => {
+    setQuestions(
+      [...dataQuestion].sort(
+        (b, a) =>
+          dataAnswers.filter((item) => item.question_id === a.id).length -
+          dataAnswers.filter((item) => item.question_id === b.id).length
+      )
+    );
+  };
 
+  const changeFilter = (e) => {
+    e.target.checked ? mostAnswers() : newest();
+    e.target.checked ? setChecked(true) : setChecked(false);
+  };
   return (
     <>
       {loggedIn ? (
@@ -37,12 +65,15 @@ const HomePage = ({
               <button className="newDiscusionKnopke">NEW DISCUSSION</button>
             </Link>
           </div>
+          Newest
+          <Switch onChange={changeFilter} />
+          Most answers
           {/* quoestion */}
-          {dataQuestion.map((question, id) => (
-            <div className="questionDiv" key={id}>
+          {dataQuestion.map((question, i) => (
+            <div className="questionDiv" key={i + 2500}>
               <Link to={`/questions/${question.id}`}>
                 <h1>
-                  {question.question}
+                  {question.question} {question.time_created}
                   {/* delete button */}
                 </h1>
               </Link>
@@ -69,7 +100,7 @@ const HomePage = ({
                   })
                   .map((answer, i, array) => {
                     return (
-                      <div key={i}>
+                      <div key={i + 100}>
                         <span className="asnwersLength">
                           {" "}
                           <Link to={`/questions/${question.id}`}>
@@ -103,28 +134,20 @@ const HomePage = ({
                                   width: 30,
                                 }}
                                 src={
-                                  typeof dataUsers !== "undefined"
-                                    ? dataUsers
-                                        .filter((username) => {
-                                          return username.id === answer.user_id;
-                                        })
-                                        .map((username) => username.picture)
-                                    : null
+                                  typeof dataUsers !== "undefined" &&
+                                  dataUsers.filter((username) => {
+                                    return username.id === answer.user_id;
+                                  })[0].picture
                                 }
                                 alt="picture"
                               />
                             </span>
                             {/* username */}
                             <span key={i}>
-                              {typeof dataUsers !== "undefined" ? (
-                                dataUsers
-                                  .filter((username) => {
-                                    return username.id === answer.user_id;
-                                  })
-                                  .map((username) => username.username)
-                              ) : (
-                                <span>Loading</span>
-                              )}
+                              {typeof dataUsers !== "undefined" &&
+                                dataUsers.filter((username) => {
+                                  return username.id === answer.user_id;
+                                })[0].username}
                             </span>
                             :{" "}
                           </span>{" "}
@@ -164,8 +187,8 @@ const HomePage = ({
           <div className="welcomeDiv">
             <h1>Wello, stranger</h1>
           </div>
-          {dataQuestion.map((question, id) => (
-            <div className="questionDiv" key={id}>
+          {dataQuestion.map((question, i) => (
+            <div className="questionDiv" key={i + 2000}>
               <Link to={`/questions/${question.id}`}>
                 <h1>{question.question}</h1>
               </Link>
@@ -176,7 +199,7 @@ const HomePage = ({
                   })
                   .map((answer, i) => {
                     return (
-                      <div key={i}>
+                      <div key={i + 500}>
                         <p
                           style={{
                             display: "flex",
@@ -203,11 +226,9 @@ const HomePage = ({
                                 }}
                                 src={
                                   typeof dataUsers !== "undefined"
-                                    ? dataUsers
-                                        .filter((username) => {
-                                          return username.id === answer.user_id;
-                                        })
-                                        .map((username) => username.picture)
+                                    ? dataUsers.filter((username) => {
+                                        return username.id === answer.user_id;
+                                      })[0].picture
                                     : null
                                 }
                                 alt=""
@@ -215,11 +236,9 @@ const HomePage = ({
                             </span>
                             <span>
                               {typeof dataUsers !== "undefined" ? (
-                                dataUsers
-                                  .filter((username) => {
-                                    return username.id === answer.user_id;
-                                  })
-                                  .map((username) => username.username)
+                                dataUsers.filter((username) => {
+                                  return username.id === answer.user_id;
+                                })[0].username
                               ) : (
                                 <span>Loading</span>
                               )}

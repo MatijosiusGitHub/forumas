@@ -73,8 +73,10 @@
       "user_id": 1,
       "question_id": 1,
       "answer": "everything is equaly hard..",
-      "edited": false,
-      "time_created": "2022-07-13"
+      "edited": true,
+      "time_created": "2022-07-13",
+      "liked": 20,
+      "dislike": 1
     },
     {
       "id": 2,
@@ -82,7 +84,9 @@
       "question_id": 1,
       "answer": "I'd say begining, HTML and CSS .. :D ",
       "edited": false,
-      "time_created": "2022-07-16"
+      "time_created": "2022-07-16",
+      "liked": 0,
+      "dislike": 1
     },
     {
       "id": 4,
@@ -90,7 +94,9 @@
       "question_id": 3,
       "answer": "I agree with Parukom ",
       "edited": false,
-      "time_created": "2022-07-16"
+      "time_created": "2022-07-16",
+      "liked": 1,
+      "dislike": 0
     },
     {
       "id": 5,
@@ -98,7 +104,9 @@
       "question_id": 3,
       "answer": "I agree with both of you ",
       "edited": false,
-      "time_created": "2022-07-16"
+      "time_created": "2022-07-16",
+      "liked": 0,
+      "dislike": 0
     },
     {
       "id": 6,
@@ -106,7 +114,9 @@
       "question_id": 2,
       "answer": "Don't worry, Parukom, real for real ravers that's not an issue 😎",
       "edited": false,
-      "time_created": "2022-07-13"
+      "time_created": "2022-07-13",
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 3,
@@ -114,7 +124,9 @@
       "answer": "not yet my man ",
       "id": 8,
       "time_created": "2022-07-19",
-      "edited": false
+      "edited": false,
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 3,
@@ -122,7 +134,9 @@
       "answer": "I've been programmed, I am the CODE!",
       "id": 9,
       "edited": false,
-      "time_created": "2022-07-15"
+      "time_created": "2022-07-15",
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 2,
@@ -130,7 +144,9 @@
       "answer": "when I started to code HTML and CSS never exist.. 😅",
       "id": 10,
       "edited": false,
-      "time_created": "2022-07-15"
+      "time_created": "2022-07-15",
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 1,
@@ -138,7 +154,9 @@
       "answer": "is it yet?",
       "id": 11,
       "edited": false,
-      "time_created": "2022-07-18"
+      "time_created": "2022-07-18",
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 3,
@@ -146,7 +164,9 @@
       "answer": "yea man",
       "id": 12,
       "edited": false,
-      "time_created": "2022-07-16"
+      "time_created": "2022-07-16",
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 1,
@@ -154,43 +174,59 @@
       "answer": "oh you old bastard, Bill... :D",
       "id": 13,
       "edited": true,
-      "time_created": "2022-07-13"
+      "time_created": "2022-07-13",
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 1,
       "question_id": 4,
       "answer": "you miscalculated, bot... 😁",
       "id": 14,
+      "time_created": "2022-07-16",
       "edited": false,
-      "time_created": "2022-07-16"
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 1,
       "question_id": 3,
       "answer": "thank you guys",
       "time_created": "2022-07-14",
-      "id": 15
+      "edited": false,
+      "liked": 0,
+      "id": 15,
+      "dislike": 0
     },
     {
       "user_id": 1,
       "question_id": 5,
       "answer": "oh yes man! was perfect, all that i need was there ! goood vibes my man",
       "time_created": "2022-07-19",
-      "id": 16
+      "id": 16,
+      "edited": false,
+      "liked": 6,
+      "dislike": 0
     },
     {
       "user_id": 1,
       "question_id": 2,
       "answer": "there was no rain! weekend was awesome!",
-      "time_created": "2022-07-19",
-      "id": 17
+      "id": 17,
+      "time_created": "2022-07-14",
+      "edited": false,
+      "liked": 0,
+      "dislike": 0
     },
     {
       "user_id": 3,
       "question_id": 6,
       "answer": " mishi misias",
       "time_created": "2022-07-19",
-      "id": 18
+      "id": 18,
+      "edited": false,
+      "liked": 0,
+      "dislike": 0
     }
   ]
 }

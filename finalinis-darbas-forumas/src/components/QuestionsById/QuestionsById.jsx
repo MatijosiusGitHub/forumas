@@ -4,13 +4,15 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+
 const QuestionByID = ({
   dataUsers,
   dataAnswers,
   user,
   loggedIn,
   getAllAnswers,
-  getAllQuestions,
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -114,6 +116,39 @@ const QuestionByID = ({
   const showHideAnswerEdit = (id) => {
     document.getElementById(`${id}`).classList.toggle("hidden");
   };
+  //    likes
+  const Like = (e, likeID, likes) => {
+    e.preventDefault();
+    fetch(`/likes/${likeID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        liked: likes + 1,
+      }),
+    })
+      .then(() => getAllAnswers())
+      .catch((err) => console.log(err));
+  };
+  // dislikes
+  const disLike = (e, disLikeID, dislikes) => {
+    e.preventDefault();
+    fetch(`/dislike/${disLikeID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        dislike: dislikes + 1,
+      }),
+    })
+      .then(() => getAllAnswers())
+      .catch((err) => console.log(err));
+  };
+
   return (
     <motion.div
       className="mainQuestionByIdDiv"
@@ -121,7 +156,9 @@ const QuestionByID = ({
       animate={{ width: "70%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
+      {/* question section */}
       <div className="mainQuestion">
+        {/* main question */}
         <h1>
           {data.question}{" "}
           <span
@@ -131,6 +168,7 @@ const QuestionByID = ({
           >
             {data.edited === true ? "edited" : null}
           </span>
+          {/*  buttons to delete or edit question  */}
           {loggedIn ? (
             <>
               <button
@@ -165,7 +203,7 @@ const QuestionByID = ({
             </>
           ) : null}
         </h1>
-        {/*  edit form  */}
+        {/*  edit question form  */}
         <form
           className="textareaQuestion hidden"
           onSubmit={(e) => editQuestionID(e, data.id)}
@@ -181,6 +219,7 @@ const QuestionByID = ({
           <button type="submit">OK</button>
         </form>
       </div>
+      {/* answer section */}
       <div className="mainAnswers">
         {dataAnswers
           .filter((answer) => {
@@ -188,9 +227,10 @@ const QuestionByID = ({
           })
           .map((answer, i) => {
             return (
-              <div key={i}>
+              <div key={i + 1000}>
                 <div className="answersByIdDiv">
-                  {/*  username for answer  */}
+                  {/*  username and image for answer  */}
+                  {/* image */}
                   <span>
                     <img
                       style={{
@@ -199,17 +239,15 @@ const QuestionByID = ({
                         width: 30,
                       }}
                       src={
-                        typeof dataUsers !== "undefined"
-                          ? dataUsers
-                              .filter((username) => {
-                                return username.id === answer.user_id;
-                              })
-                              .map((username) => username.picture)
-                          : null
+                        typeof dataUsers !== "undefined" &&
+                        dataUsers.filter((username) => {
+                          return username.id === answer.user_id;
+                        })[0].picture
                       }
                       alt="picture"
                     />
                   </span>
+                  {/* username */}
                   <span
                     style={{ fontWeight: "bold", color: "rgb(179, 179, 179)" }}
                   >
@@ -218,13 +256,16 @@ const QuestionByID = ({
                         .filter((username) => {
                           return username.id === answer.user_id;
                         })
-                        .map((username) => username.username)
+                        .map((username, i) => (
+                          <span key={i + 1500}>{username.username}</span>
+                        ))
                     ) : (
                       <span>Loading</span>
                     )}
                     :
                   </span>{" "}
                   <span className="answerById">{answer.answer} </span>
+                  {/* edited answer */}
                   <span
                     style={{
                       fontSize: 7,
@@ -274,13 +315,15 @@ const QuestionByID = ({
                       ) : null}
                     </span>{" "}
                   </span>
+                  {/* time created */}
                   <span className="timeCreatedAtDivByID">
                     {answer.time_created}
                   </span>
+                  <span></span>
                 </div>
-                {user.id === answer.user_id ? (
+                {/*  edit form  */}
+                {user.id === answer.user_id && (
                   <div>
-                    {/*  edit form  */}
                     <form
                       id={answer.id}
                       className="textareaAnswer hidden"
@@ -297,12 +340,27 @@ const QuestionByID = ({
                       <button type="submit">OK</button>
                     </form>
                   </div>
-                ) : null}
+                )}
+                {/* like/dislike */}
+                <div className="likeDislikeDiv">
+                  <p>{answer.liked}</p>
+                  <form onSubmit={(e) => Like(e, answer.id, answer.liked)}>
+                    <button type="submit">
+                      <ThumbUpAltIcon color="success" />
+                    </button>
+                  </form>
+                  <p>{answer?.dislike}</p>
+                  <form onSubmit={(e) => disLike(e, answer.id, answer.dislike)}>
+                    <button type="submit">
+                      <ThumbDownIcon color="error" />
+                    </button>
+                  </form>
+                </div>
               </div>
             );
           })}
       </div>
-      {loggedIn ? (
+      {loggedIn && (
         <div>
           {/*  answer form  */}
           <form
@@ -318,7 +376,7 @@ const QuestionByID = ({
             <button type="submit">Answer</button>
           </form>
         </div>
-      ) : null}
+      )}
     </motion.div>
   );
 };

@@ -17,10 +17,10 @@ function AnimatedRoutes() {
 
   const [questions, setQuestions] = useState([]); // get all questions
   const [answers, setAnswers] = useState([]); // all answers
+  const [answer, setAnswer] = useState([]); // get one answer
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({}); // login ir register user, welcome user
   const [users, setUsers] = useState(); // users i ekrana
-  const [answer, setAnswer] = useState([]); // get one answer
 
   const getAllAnswers = () => {
     fetch("/answers")
@@ -104,6 +104,7 @@ function AnimatedRoutes() {
           path="/"
           element={
             <HomePage
+              setQuestions={setQuestions}
               getAllQuestions={getAllQuestions}
               user={user} // prisijungusio userio username
               dataUsers={users} // username ir id kurie persiduos prie atsakymu
