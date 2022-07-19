@@ -154,7 +154,6 @@ app.delete("/deleteAnswer/:id", async (req, res) => {
 });
 // edit answer
 app.patch("/question/answer/:id", async (req, res) => {
-  console.log("asda");
   await fetch(`http://localhost:8080/answers/${req.params.id}`, {
     method: "PATCH",
     headers: {
@@ -228,3 +227,14 @@ app.patch("/dislike/:id", async (req, res) => {
 app.listen(process.env.PORT || 5051, () =>
   console.log(`serveris vaziuoja ant ${PORT} porto`)
 );
+// update picture
+app.patch("/updateProfPic/:id", async (req, res) => {
+  await fetch(`http://localhost:8080/users/${req.params.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ picture: req.body.picture, edited: true }),
+  });
+  res.json({ success: true });
+});

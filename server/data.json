@@ -41,8 +41,9 @@
       "password": "$2a$10$/b1PpxkihBlHK65PqMmCzeKbQEY6UbXMYWZMn5oshLCF7K0PUVJ.6",
       "age": "99",
       "id": 4,
-      "picture": "https://www.emmys.com/sites/default/files/disney-mickey-mouse-600x600.jpg",
-      "cover_picture": "https://g.foolcdn.com/editorial/images/642304/disneymickeygang50.jpeg"
+      "picture": "https://static.wikia.nocookie.net/mickey-and-friends/images/7/7a/Mickey.jpg/revision/latest?cb=20200829043032",
+      "cover_picture": "https://g.foolcdn.com/editorial/images/642304/disneymickeygang50.jpeg",
+      "edited": true
     }
   ],
   "questions": [
@@ -107,7 +108,7 @@
       "user_id": 2,
       "question_id": 3,
       "answer": "I agree with Parukom ",
-      "edited": false,
+      "edited": true,
       "time_created": "2022-07-16",
       "liked": 1,
       "dislike": 0
@@ -251,7 +252,8 @@
       "edited": false,
       "liked": 0,
       "dislike": 0
-    },{
+    },
+    {
       "user_id": 3,
       "question_id": 5,
       "answer": "I don't like cartoons.. I like drama",
@@ -260,7 +262,8 @@
       "edited": false,
       "liked": 15,
       "dislike": 0
-    },{
+    },
+    {
       "user_id": 1,
       "question_id": 5,
       "answer": "Oh, you as always as bot.. :D you need an update @terminator",
