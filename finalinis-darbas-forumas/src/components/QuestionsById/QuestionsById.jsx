@@ -369,10 +369,11 @@ const QuestionByID = ({
           >
             <textarea
               name="answerToComment"
-              cols="125"
+              style={{ width: "60%" }}
               rows="10"
               required
-            ></textarea>
+            ></textarea>{" "}
+            <br />
             <button type="submit">Answer</button>
           </form>
         </div>

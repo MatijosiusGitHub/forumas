@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-
 import { AnimatePresence } from "framer-motion";
 
 // components
@@ -11,6 +10,7 @@ import HomePage from "../Home/Homepage";
 import QuestionByID from "../QuestionsById/QuestionsById";
 import AddQuestion from "../AddQuestion/AddQuestion";
 import Footer from "../smallComponents/Footer";
+import User from "../User/User";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -21,6 +21,8 @@ function AnimatedRoutes() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({}); // login ir register user, welcome user
   const [users, setUsers] = useState(); // users i ekrana
+
+  // delete question
 
   const getAllAnswers = () => {
     fetch("/answers")
@@ -72,14 +74,32 @@ function AnimatedRoutes() {
           setLoggedIn(false);
         } else {
           setLoggedIn(true);
-          setUser({ username: data.username, id: data.id });
+          setUser({
+            username: data.username,
+            id: data.id,
+            picture: data.picture,
+            cover_picture: data.cover_picture,
+            name: data.name,
+            surname: data.surname,
+          });
         }
       });
-  }, []);
+  }, [loggedIn]);
   return (
     <AnimatePresence>
       <Navbar user={user} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes location={location} key={location.pathname}>
+        <Route
+          path="/user"
+          element={
+            <User
+              getAllQuestions={getAllQuestions}
+              questions={questions}
+              user={user}
+              users={users}
+            />
+          }
+        />
         <Route
           path="/questions/:id"
           element={

@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
 import jwt from "jsonwebtoken";
+import bcrypt from 'bcryptjs'
 import isLoggedIn from "./isLoggedIn.js";
 
 const app = express();
@@ -18,30 +19,59 @@ app.post("/login", async (req, res) => {
     data.json()
   );
   const user = data.filter((item) => item.username === req.body.username);
-  if (user[0].password === req.body.password) {
-    const token = jwt.sign(
-      { id: user[0].id, username: user[0].username },
+  const isAuthed = bcrypt.compareSync(req.body.password, user[0].password)
+
+  if (req.body.length === 0) {
+    return res.status(400).send({ err: `incorrect email or password 👎🏽` })
+  }
+  console.log(isAuthed)
+  if (isAuthed) {
+    const token = jwt.sign({
+      id: user[0].id,
+      name: user[0].name,
+      username: user[0].username,
+      surname: user[0].surname,
+      picture: user[0]?.picture,
+      cover_picture: user[0]?.cover_picture
+    },
       process.env.SECRET
     );
     res.json({
       id: user[0].id,
+      name: user[0].name,
+      surname: user[0].surname,
       username: user[0].username,
+      picture: user[0]?.picture,
+      cover_picture: user[0]?.cover_picture,
       token,
     });
+
   } else {
-    res.json({ err: "invalid username or password" });
+    return res.status(400).send(`wrong email or password amigo`)
   }
 });
 // register user
 app.post("/register", async (req, res) => {
+  const hashedPassword = bcrypt.hashSync(req.body.password);
+  const user = {
+    name: req.body.name,
+    username: req.body.username,
+    surname: req.body.surname,
+    picture: req.body?.picture,
+    cover_picture: req.body?.cover_picture,
+    email: req.body.email,
+    password: hashedPassword,
+    age: req.body.age
+  }
   await fetch("http://localhost:8080/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(req.body),
-  });
-  res.json();
+    body: JSON.stringify(user),
+  })
+    .then(res => res.json())
+    .catch(err => alert(err, 'something is wrong here'))
 });
 // verify token
 app.get("/verifyToken", async (req, res) => {
@@ -50,9 +80,12 @@ app.get("/verifyToken", async (req, res) => {
     verify: verify,
     username: req.token?.username,
     id: req.token?.id,
+    picture: req.token?.picture,
+    cover_picture: req.token?.cover_picture,
+    name: req.token?.name,
+    surname: req.token?.surname
   });
 });
-
 // questions
 app.get("/questions/:id?", async (req, res) => {
   const data = await fetch(
@@ -131,14 +164,20 @@ app.patch("/question/answer/:id", async (req, res) => {
   });
   res.json({ success: true });
 });
-
 // users
 app.get("/users/", async (req, res) => {
   const data = await fetch(`http://localhost:8080/users/`).then((data) =>
     data.json()
   );
-  const usernames = data.map((username) => {
-    return { username: username.username, id: username.id, picture: username.picture };
+  const usernames = data.map((data) => {
+    return {
+      username: data.username,
+      id: data.id,
+      picture: data.picture,
+      cover_picture: data.cover_picture,
+      name: data.name,
+      surname: data.surname
+    };
   });
   res.json(usernames);
 });
@@ -164,7 +203,6 @@ app.patch("/likes/:id", async (req, res) => {
   });
   res.json({ success: true });
 });
-
 // get dislike
 app.get("/dislike/:id", async (req, res) => {
   const data = await fetch(
@@ -172,7 +210,6 @@ app.get("/dislike/:id", async (req, res) => {
   ).then((data) => data.json());
   res.json(data);
 });
-
 // update dislike
 app.patch("/dislike/:id", async (req, res) => {
   const auth = await isLoggedIn(req)

@@ -3,7 +3,7 @@ import Logo from "../smallComponents/Logo";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Nav = ({ loggedIn, setLoggedIn }) => {
+const Nav = ({ loggedIn, setLoggedIn, user }) => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
@@ -18,7 +18,9 @@ const Nav = ({ loggedIn, setLoggedIn }) => {
             <Logo />
           </Link>
           <div>
-            <button></button>
+            <Link to="/user">
+              <button>{user.username}</button>
+            </Link>
             <button onClick={logout}>Logout</button>
           </div>
         </nav>

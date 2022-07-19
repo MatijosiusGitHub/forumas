@@ -2,7 +2,7 @@
     width: 650px;
     margin: 0 auto;
     position: relative;
-    box-shadow: 0 0 5px black;
+    /* box-shadow: 0 0 5px black; */
     padding: 30px;
 }
 .hidden{
@@ -20,8 +20,11 @@
     padding: 10px;
 }
 .answersByIdDiv{
-    box-shadow: 0 0 5px black;
+    /* box-shadow: 0 0 5px black; */
     border-bottom: 2px solid gray;
+    box-shadow: -1px 3px 4px white;
+    background-color: rgba(255, 255, 255, 0.063);
+    border-radius: 5px;
     padding: 20px;
     /* margin-top: 20px; */
     display: flex;
@@ -54,12 +57,12 @@
 .answerQuestionForm textarea{
     background-color: rgb(163, 163, 163);
     border: none;
-    box-shadow: 0 0 5px gray;
+    /* box-shadow: 0 0 5px gray; */
 }
 .textareaAnswer textarea{
     background-color: rgb(163, 163, 163);
     border: none;
-    box-shadow: 0 0 5px gray;
+    /* box-shadow: 0 0 5px gray; */
 }
 .textareaQuestion textarea{
     background-color: rgb(163, 163, 163);
@@ -81,6 +84,7 @@
     transform: scale(1.4);
 }
 .likeDislikeDiv{
+    color: white;
     display: flex;
     align-items: center;
 }

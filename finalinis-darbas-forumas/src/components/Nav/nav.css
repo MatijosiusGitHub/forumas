@@ -1,9 +1,11 @@
 nav{
+    background-color: rgba(255, 255, 255, 0.068);
     height: 50px;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 0 15px white;
 }
 nav button{
     background-color: transparent;

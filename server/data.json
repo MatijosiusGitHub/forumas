@@ -8,7 +8,8 @@
       "age": 32,
       "email": "tomas@mail.com",
       "password": "allGood",
-      "picture": "https://cdn.mos.cms.futurecdn.net/LgoJcJCxraHdG9cijF5AmQ.jpg"
+      "picture": "https://cdn.mos.cms.futurecdn.net/LgoJcJCxraHdG9cijF5AmQ.jpg",
+      "cover_picture": "https://i.ytimg.com/vi/yUHwj6AAWJE/maxresdefault.jpg"
     },
     {
       "name": "Bill",
@@ -16,9 +17,10 @@
       "username": "billGates",
       "age": "60",
       "email": "bgates@microsoft.com",
-      "password": "billgates",
+      "password": "$2a$10$ANB3jt/0TxJKqDDxOhQsAub2GLTIdfMnT.RT/OTwRLQS2Tf7WfDEy",
       "id": 2,
-      "picture": "https://image.cnbcfm.com/api/v1/image/106967046-1635430835800-gettyimages-946971500-99821012.jpeg?v=1653062440"
+      "picture": "https://image.cnbcfm.com/api/v1/image/106967046-1635430835800-gettyimages-946971500-99821012.jpeg?v=1653062440",
+      "cover_picture": "https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F95465af9-a6d7-49a0-a118-cc099a0d10ba.jpg?fit=scale-down&source=next&width=700"
     },
     {
       "name": "Arnorld",
@@ -28,7 +30,17 @@
       "email": "a.sz@mail.com",
       "password": "terminator",
       "id": 3,
-      "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Terminator-2-judgement-day.jpg/220px-Terminator-2-judgement-day.jpg"
+      "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Terminator-2-judgement-day.jpg/220px-Terminator-2-judgement-day.jpg",
+      "cover_picture": "https://assets1.ignimgs.com/2013/09/05/terminator-1280jpg-883064_160w.jpg?width=1280"
+    },
+    {
+      "name": "Walt",
+      "username": "waltDisney",
+      "surname": "Disney",
+      "email": "disney@mail.com",
+      "password": "$2a$10$/b1PpxkihBlHK65PqMmCzeKbQEY6UbXMYWZMn5oshLCF7K0PUVJ.6",
+      "age": "99",
+      "id": 4
     }
   ],
   "questions": [
@@ -59,12 +71,6 @@
       "id": 4,
       "edited": false,
       "time_created": "2022-07-16"
-    },
-    {
-      "user_id": 3,
-      "question": "how's rave, parukom? ",
-      "time_created": "2022-07-19",
-      "id": 5
     }
   ],
   "answers": [

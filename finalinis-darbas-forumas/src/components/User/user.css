@@ -1,0 +1,58 @@
+.mainDivProfile{
+    margin: 0 auto;
+    position: relative;
+}
+.mainProfileDiv h1{
+    color: rgb(217, 217, 217);
+    text-align: center;
+    margin-top: 170px;
+}
+.mainProfileDiv h2{
+    color: rgb(217, 217, 217);
+}
+.coverPic{
+    height: 350px;
+    width: 100%;
+    overflow: hidden;
+    background-color: gray;
+}
+.coverPicPic{
+    color: transparent;
+    margin-top: -100px;
+    width: 100%;
+}
+.profilePicDiv{
+    color: transparent;
+    background-color: gray;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 260px;
+    left: 39%;
+    right: 40%;
+    box-shadow: 0 0 5px black;
+}
+.profilePicPic{
+    height: 250px;
+}
+.profileRecentPosts{
+    width: auto;
+    height: 400px;
+}
+.profileRecentPosts p {
+    border-bottom: 1px solid gray;
+    margin-top: 30px;
+    color: rgb(207, 207, 207);
+    padding: 5px;
+}
+.profileDeleteQuestion{
+    background-color: transparent;
+    color: red;
+    border: 1px solid red;
+    border-radius: 50px;
+    font-size: 8;
+    cursor: pointer;
+    float: right;
+}
