@@ -7,7 +7,8 @@
       "username": "parukom",
       "age": 32,
       "email": "tomas@mail.com",
-      "password": "allGood"
+      "password": "allGood",
+      "picture": "https://cdn.mos.cms.futurecdn.net/LgoJcJCxraHdG9cijF5AmQ.jpg"
     },
     {
       "name": "Bill",
@@ -16,7 +17,8 @@
       "age": "60",
       "email": "bgates@microsoft.com",
       "password": "billgates",
-      "id": 2
+      "id": 2,
+      "picture": "https://image.cnbcfm.com/api/v1/image/106967046-1635430835800-gettyimages-946971500-99821012.jpeg?v=1653062440"
     },
     {
       "name": "Arnorld",
@@ -25,7 +27,8 @@
       "age": "65",
       "email": "a.sz@mail.com",
       "password": "terminator",
-      "id": 3
+      "id": 3,
+      "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Terminator-2-judgement-day.jpg/220px-Terminator-2-judgement-day.jpg"
     }
   ],
   "questions": [
@@ -56,6 +59,12 @@
       "id": 4,
       "edited": false,
       "time_created": "2022-07-16"
+    },
+    {
+      "user_id": 3,
+      "question": "how's rave, parukom? ",
+      "time_created": "2022-07-19",
+      "id": 5
     }
   ],
   "answers": [
@@ -104,6 +113,7 @@
       "question_id": 4,
       "answer": "not yet my man ",
       "id": 8,
+      "time_created": "2022-07-19",
       "edited": false
     },
     {
@@ -153,6 +163,34 @@
       "id": 14,
       "edited": false,
       "time_created": "2022-07-16"
+    },
+    {
+      "user_id": 1,
+      "question_id": 3,
+      "answer": "thank you guys",
+      "time_created": "2022-07-14",
+      "id": 15
+    },
+    {
+      "user_id": 1,
+      "question_id": 5,
+      "answer": "oh yes man! was perfect, all that i need was there ! goood vibes my man",
+      "time_created": "2022-07-19",
+      "id": 16
+    },
+    {
+      "user_id": 1,
+      "question_id": 2,
+      "answer": "there was no rain! weekend was awesome!",
+      "time_created": "2022-07-19",
+      "id": 17
+    },
+    {
+      "user_id": 3,
+      "question_id": 6,
+      "answer": " mishi misias",
+      "time_created": "2022-07-19",
+      "id": 18
     }
   ]
 }

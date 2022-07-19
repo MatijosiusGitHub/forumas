@@ -8,14 +8,14 @@ const Logo = () => {
     >
       <span
         style={{
-          color: "red",
+          color: "white",
         }}
       >
         get
       </span>
       <span
         style={{
-          color: "green",
+          color: "rgb(62, 216, 255)",
         }}
       >
         Answer

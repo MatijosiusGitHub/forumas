@@ -1,4 +1,32 @@
 .mainLoginDiv{
     margin: 0 auto;
+    margin-top: 100px;
     width: 650px;
+    box-shadow: 0 0 5px black;
+    padding: 50px;
+}
+.mainLoginDiv h1 {
+    color: rgb(192, 192, 192);
+    text-shadow: 0 0 5px black;
+}
+.mainLoginDiv label {
+    color: white;
+}
+.mainLoginDiv input{
+    width: 99%;
+    height: 30px;
+    margin-top: 10px;
+}
+.mainLoginDiv button {
+    border: 1px solid gray;
+    background-color: transparent;
+    height: 30px;
+    margin-top: 40px;
+    transition: 0.1s;
+    width: 100px;
+    color: antiquewhite;
+}
+.mainLoginDiv button:hover {
+    transition: 0.1s;
+    transform: scale(1.4);
 }

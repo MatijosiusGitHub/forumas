@@ -107,7 +107,7 @@ app.post(`/question/answer/:id?`, async (req, res) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ user_id, question_id, answer }),
+      body: JSON.stringify({ user_id, question_id, answer, time_created: new Date().toLocaleDateString("LT") }),
     }
   );
   res.json({ success: true });
@@ -138,7 +138,7 @@ app.get("/users/", async (req, res) => {
     data.json()
   );
   const usernames = data.map((username) => {
-    return { username: username.username, id: username.id };
+    return { username: username.username, id: username.id, picture: username.picture };
   });
   res.json(usernames);
 });

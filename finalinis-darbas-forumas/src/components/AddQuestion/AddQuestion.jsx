@@ -1,5 +1,6 @@
 import "./addQuestion.css";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const AddQuestion = ({ user, getAllQuestions }) => {
   const navigate = useNavigate();
@@ -23,8 +24,13 @@ const AddQuestion = ({ user, getAllQuestions }) => {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="mainFormDiv">
-      <form onSubmit={askQuestion}>
+    <motion.div
+      initial={{ width: 0 }}
+      animate={{ width: "70%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
+      className="mainFormDiv"
+    >
+      <form className="askQuestionForm" onSubmit={askQuestion}>
         <h1>Ask question</h1>
         <p>Try to ask right way to understand your question</p>
         <input
@@ -36,7 +42,7 @@ const AddQuestion = ({ user, getAllQuestions }) => {
         <br />
         <button type="submit">Ask</button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 export default AddQuestion;

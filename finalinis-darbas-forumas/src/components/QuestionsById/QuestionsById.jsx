@@ -2,6 +2,8 @@ import "./questionsOnid.css";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { motion } from "framer-motion";
+
 const QuestionByID = ({
   dataUsers,
   dataAnswers,
@@ -113,7 +115,12 @@ const QuestionByID = ({
     document.getElementById(`${id}`).classList.toggle("hidden");
   };
   return (
-    <div className="mainQuestionByIdDiv">
+    <motion.div
+      className="mainQuestionByIdDiv"
+      initial={{ width: 0 }}
+      animate={{ width: "70%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
+    >
       <div className="mainQuestion">
         <h1>
           {data.question}{" "}
@@ -124,34 +131,39 @@ const QuestionByID = ({
           >
             {data.edited === true ? "edited" : null}
           </span>
-          <button
-            onClick={deleteQuestion}
-            style={{
-              backgroundColor: "transparent",
-              color: "red",
-              border: "1px solid red",
-              borderRadius: "50px",
-              fontSize: 8,
-              float: "right",
-              cursor: "pointer",
-            }}
-          >
-            {" "}
-            delete
-          </button>
-          <button
-            onClick={showHideQuestionEdit}
-            style={{
-              fontSize: 10,
-              backgroundColor: "transparent",
-              border: "1px solid gray",
-              borderRadius: "50px",
-              cursor: "pointer",
-              float: "right",
-            }}
-          >
-            edit
-          </button>
+          {loggedIn ? (
+            <>
+              <button
+                onClick={deleteQuestion}
+                style={{
+                  backgroundColor: "transparent",
+                  color: "red",
+                  border: "1px solid red",
+                  borderRadius: "50px",
+                  fontSize: 8,
+                  float: "right",
+                  cursor: "pointer",
+                }}
+              >
+                {" "}
+                delete
+              </button>
+              <button
+                onClick={showHideQuestionEdit}
+                style={{
+                  fontSize: 10,
+                  backgroundColor: "transparent",
+                  border: "1px solid gray",
+                  borderRadius: "50px",
+                  color: "gray",
+                  cursor: "pointer",
+                  float: "right",
+                }}
+              >
+                edit
+              </button>
+            </>
+          ) : null}
         </h1>
         {/*  edit form  */}
         <form
@@ -160,7 +172,7 @@ const QuestionByID = ({
         >
           <textarea
             name="editQuestion"
-            cols="75"
+            cols="126"
             rows="4"
             required
             value={edit}
@@ -177,9 +189,30 @@ const QuestionByID = ({
           .map((answer, i) => {
             return (
               <div key={i}>
-                <div>
+                <div className="answersByIdDiv">
                   {/*  username for answer  */}
-                  <span style={{ fontWeight: "bold" }}>
+                  <span>
+                    <img
+                      style={{
+                        borderRadius: "50%",
+                        height: 30,
+                        width: 30,
+                      }}
+                      src={
+                        typeof dataUsers !== "undefined"
+                          ? dataUsers
+                              .filter((username) => {
+                                return username.id === answer.user_id;
+                              })
+                              .map((username) => username.picture)
+                          : null
+                      }
+                      alt="picture"
+                    />
+                  </span>
+                  <span
+                    style={{ fontWeight: "bold", color: "rgb(179, 179, 179)" }}
+                  >
                     {typeof dataUsers !== "undefined" ? (
                       dataUsers
                         .filter((username) => {
@@ -191,55 +224,59 @@ const QuestionByID = ({
                     )}
                     :
                   </span>{" "}
-                  {answer.answer}{" "}
+                  <span className="answerById">{answer.answer} </span>
                   <span
                     style={{
                       fontSize: 7,
                     }}
                   >
                     {answer.edited === true ? "edited" : null}
+                    {/*  delete button  */}
+                    <span>
+                      {user.id === answer.user_id ? (
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            color: "red",
+                            border: "1px solid red",
+                            borderRadius: "50px",
+                            fontSize: 8,
+                            float: "right",
+                            cursor: "pointer",
+                          }}
+                          onClick={() =>
+                            deleteAnswer(
+                              user.id === answer.user_id ? answer.id : null
+                            )
+                          }
+                        >
+                          delete
+                        </button>
+                      ) : null}
+                    </span>{" "}
+                    {/*  edit button */}
+                    <span>
+                      {user.id === answer.user_id ? (
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: " 1px solid gray",
+                            color: "gray",
+                            fontSize: 8,
+                            borderRadius: "50px",
+                            float: "right",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => showHideAnswerEdit(answer.id)}
+                        >
+                          edit
+                        </button>
+                      ) : null}
+                    </span>{" "}
                   </span>
-                  {/*  delete button  */}
-                  <span>
-                    {user.id === answer.user_id ? (
-                      <button
-                        style={{
-                          backgroundColor: "transparent",
-                          color: "red",
-                          border: "1px solid red",
-                          borderRadius: "50px",
-                          fontSize: 8,
-                          float: "right",
-                          cursor: "pointer",
-                        }}
-                        onClick={() =>
-                          deleteAnswer(
-                            user.id === answer.user_id ? answer.id : null
-                          )
-                        }
-                      >
-                        delete
-                      </button>
-                    ) : null}
-                  </span>{" "}
-                  {/*  edit button */}
-                  <span>
-                    {user.id === answer.user_id ? (
-                      <button
-                        style={{
-                          backgroundColor: "transparent",
-                          border: " 1px solid gray",
-                          fontSize: 8,
-                          borderRadius: "50px",
-                          float: "right",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => showHideAnswerEdit(answer.id)}
-                      >
-                        edit
-                      </button>
-                    ) : null}
-                  </span>{" "}
+                  <span className="timeCreatedAtDivByID">
+                    {answer.time_created}
+                  </span>
                 </div>
                 {user.id === answer.user_id ? (
                   <div>
@@ -251,14 +288,12 @@ const QuestionByID = ({
                     >
                       <textarea
                         name="editAnswer"
-                        cols="75"
+                        cols="126"
                         rows="4"
                         required
                         value={change}
                         onChange={(e) => setChange(e.target.value)}
-                      >
-                        {user.id === answer.user_id ? answer.answer : null}
-                      </textarea>
+                      ></textarea>
                       <button type="submit">OK</button>
                     </form>
                   </div>
@@ -270,10 +305,13 @@ const QuestionByID = ({
       {loggedIn ? (
         <div>
           {/*  answer form  */}
-          <form onSubmit={(e) => answerQuestion(e)}>
+          <form
+            className="answerQuestionForm"
+            onSubmit={(e) => answerQuestion(e)}
+          >
             <textarea
               name="answerToComment"
-              cols="75"
+              cols="125"
               rows="10"
               required
             ></textarea>
@@ -281,7 +319,7 @@ const QuestionByID = ({
           </form>
         </div>
       ) : null}
-    </div>
+    </motion.div>
   );
 };
 export default QuestionByID;

@@ -1,7 +1,82 @@
 .mainQuestionByIdDiv{
     width: 650px;
     margin: 0 auto;
+    position: relative;
+    box-shadow: 0 0 5px black;
+    padding: 30px;
 }
 .hidden{
     display: none;
+}
+
+
+.mainQuestionByIdDiv h1 {
+    color: rgb(215, 215, 215);
+    text-shadow: 0 0 5px black;
+}
+.answerById{
+    line-height: 30px;
+    color: rgb(215, 215, 215);
+    padding: 10px;
+}
+.answersByIdDiv{
+    box-shadow: 0 0 5px black;
+    border-bottom: 2px solid gray;
+    padding: 20px;
+    /* margin-top: 20px; */
+    display: flex;
+    align-items: center;
+}
+.timeCreatedAtDivByID{
+    color: white;
+    font-size: 10px;
+    margin-left: 50px;
+    position: absolute;
+    right: 90px;
+}
+.answerQuestionForm{
+    margin-top: 100px;
+}
+.answerQuestionForm button {
+    border: 1px solid gray;
+    background-color: transparent;
+    height: 30px;
+    margin-top: 40px;
+    transition: 0.1s;
+    width: 100px;
+    color: antiquewhite;
+}
+
+.answerQuestionForm button:hover {
+    transition: 0.1s;
+    transform: scale(1.4);
+}
+.answerQuestionForm textarea{
+    background-color: rgb(163, 163, 163);
+    border: none;
+    box-shadow: 0 0 5px gray;
+}
+.textareaAnswer textarea{
+    background-color: rgb(163, 163, 163);
+    border: none;
+    box-shadow: 0 0 5px gray;
+}
+.textareaQuestion textarea{
+    background-color: rgb(163, 163, 163);
+    border: none;
+    box-shadow: 0 0 5px gray;
+}
+.textareaQuestion button{
+    border: 1px solid gray;
+    background-color: transparent;
+    height: 30px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    transition: 0.1s;
+    width: 100px;
+    color: antiquewhite;
+}
+.textareaQuestion button:hover{
+    transition: 0.1s;
+    transform: scale(1.4);
 }

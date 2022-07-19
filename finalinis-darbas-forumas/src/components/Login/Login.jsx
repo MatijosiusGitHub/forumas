@@ -34,7 +34,7 @@ const Login = ({ setUser, setLoggedIn }) => {
         <label htmlFor="username">Enter your username</label> <br />
         <input type="text" placeholder="Username" name="username" /> <br />
         <label htmlFor="password">Enter your password</label> <br />
-        <input type="password" placeholder="Password" name="password" />
+        <input type="password" placeholder="Password" name="password" /> <br />
         <button type="submit">Log in</button>
       </form>
     </div>
