@@ -56,3 +56,13 @@
     cursor: pointer;
     float: right;
 }
+.bigPictureButton{
+    position: absolute;
+    top: 260px;
+        left: 39%;
+        right: 40%;
+        z-index: 1;
+}
+.knope:hover{
+color:rgb(52, 228, 255);
+}

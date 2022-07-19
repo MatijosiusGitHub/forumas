@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 
 import CommentIcon from "@mui/icons-material/Comment";
+import BasicModal from "../ProfilePictureModal/ProfilePicModal";
 
 function User({ user, questions, getAllQuestions }) {
-  const navigate = useNavigate();
+  const data = user;
 
   // delete question
   const deleteQuestion = (questionID) => {
@@ -33,6 +34,9 @@ function User({ user, questions, getAllQuestions }) {
           />
         </div>
         {/* profile pic */}
+        <div className="bigPictureButton">
+          <BasicModal user={data} />
+        </div>
         <div className="profilePicDiv">
           <img
             className="profilePicPic"

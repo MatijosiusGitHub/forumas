@@ -40,7 +40,9 @@
       "email": "disney@mail.com",
       "password": "$2a$10$/b1PpxkihBlHK65PqMmCzeKbQEY6UbXMYWZMn5oshLCF7K0PUVJ.6",
       "age": "99",
-      "id": 4
+      "id": 4,
+      "picture": "https://www.emmys.com/sites/default/files/disney-mickey-mouse-600x600.jpg",
+      "cover_picture": "https://g.foolcdn.com/editorial/images/642304/disneymickeygang50.jpeg"
     }
   ],
   "questions": [
@@ -71,6 +73,12 @@
       "id": 4,
       "edited": false,
       "time_created": "2022-07-16"
+    },
+    {
+      "user_id": 4,
+      "question": "what's your favourite cartoon?",
+      "time_created": "2022-07-19",
+      "id": 5
     }
   ],
   "answers": [
@@ -207,11 +215,21 @@
     {
       "user_id": 1,
       "question_id": 5,
-      "answer": "oh yes man! was perfect, all that i need was there ! goood vibes my man",
+      "answer": "I'm sorry brother, but cant say your cartoons is the best ... Dragon Ball was the best!",
       "time_created": "2022-07-19",
       "id": 16,
       "edited": false,
       "liked": 6,
+      "dislike": 1
+    },
+    {
+      "user_id": 2,
+      "question_id": 5,
+      "answer": "Love your cartoons! Mickey is the best! He's King of cartoons!",
+      "time_created": "2022-07-19",
+      "id": 19,
+      "edited": false,
+      "liked": 3,
       "dislike": 0
     },
     {
@@ -232,6 +250,24 @@
       "id": 18,
       "edited": false,
       "liked": 0,
+      "dislike": 0
+    },{
+      "user_id": 3,
+      "question_id": 5,
+      "answer": "I don't like cartoons.. I like drama",
+      "time_created": "2022-07-19",
+      "id": 20,
+      "edited": false,
+      "liked": 15,
+      "dislike": 0
+    },{
+      "user_id": 1,
+      "question_id": 5,
+      "answer": "Oh, you as always as bot.. :D you need an update @terminator",
+      "time_created": "2022-07-19",
+      "id": 21,
+      "edited": false,
+      "liked": 15,
       "dislike": 0
     }
   ]

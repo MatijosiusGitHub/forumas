@@ -73,7 +73,7 @@ const HomePage = ({
             <div className="questionDiv" key={i + 2500}>
               <Link to={`/questions/${question.id}`}>
                 <h1>
-                  {question.question} {question.time_created}
+                  {question.question}
                   {/* delete button */}
                 </h1>
               </Link>
